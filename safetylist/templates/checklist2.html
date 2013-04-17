@@ -1,0 +1,15 @@
+
+<center><h1>List Safety Awareness Checklist</h1></center>
+{%if contact%}
+<ul>	
+	{% for user in contact %}
+	<li>Name:&nbsp <u>{{ user.name }}</u> 
+	&nbsp NIST Contact: &nbsp<u>{{ user.nist_contact }}</u> &nbsp <a href="{% url detail user.id %}"><INPUT TYPE="button" VALUE="Detail"></a>
+	</li>
+	{% endfor %}
+</ul>
+
+{% else %}
+	<p>user is not available.</p>
+{% endif %}
+<a href=" {% url add %}"><INPUT TYPE="button" VALUE="Add Form"></a>
