@@ -1,0 +1,139 @@
+<html>
+<head>
+    <title>Neutron Activation Calculator</title>
+
+
+    <style type="text/css">
+        body { font-size: 0.9em; }
+        label { font-weight: inherit; }
+        .hidden { overflow: hidden; }
+        .colborder { margin-bottom: -100%; padding-bottom: 100%; }
+        caption, td, th { padding-top: 0, padding-bottom: 0; }
+        tbody tr:nth-child(2n) th, tbody tr.even th,
+        tbody tr:nth-child(2n) td, tbody tr.even td,
+        ul li:nth-child(2n), ol li:nth-child(2n) { background: inherit; /* background: none repeat scroll 0 0 #F3F3F9; */ }
+    </style>
+
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript" src="/static/lib/ajaxCSRFfix.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#id-activationForm").submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    type:"POST",
+                    url:"http://sparkle.ncnr.nist.gov:8000/cgibin/nact.py?sample=H2O",//"http://www.ncnr.nist.gov/cgi-bin/nact.py?sample=H2O",//"/activation/",
+                    data: {chemical_formula: $('input:text[id=id_chemical_formula]').val(),
+                        flux: $('input:text[id=id_flux]').val(),
+                        mass: $('input:text[id=id_mass]').val(),
+                        time_on: $('input:text[id=id_time_on]').val(),
+                        time_off: $('input:text[id=id_time_off]').val()
+                    },
+                    success: function(ldata){
+                        console.log(ldata);
+//    var result={"sample": "H2O",
+//        "flux": 100000.0,
+//        "total": [1.7392087984473418e-06, 1.3956412267781634e-13, 1.3955889378618731e-13, 1.3948351060971843e-13],
+//        "mass": 1.0, "rest": [0.0, 1.0, 24.0, 360.0],
+//        "activity": [["H-2", "H-3", "act", "12.346 y", 3.483063328044691e-14, 3.483041009656089e-14, 3.482527726186947e-14, 3.4750379423468825e-14],
+//            ["O-16", "N-16", "n,p", "7.14 s", 1.7125399929855225e-06, 3.0620613990759853e-158, 0.0, 0.0],
+//            ["O-16", "O-15", "n,2n", "122 s", 4.777085237307763e-11, 6.283430904318814e-20, 3.435385428075529e-224, 0.0],
+//            ["O-17", "C-14", "n,a", "5736 y", 1.0473365119140876e-13, 1.0473364974694641e-13, 1.0473361652431783e-13, 1.0473313118624961e-13],
+//            ["O-17", "N-17", "n,p", "4.17 s", 2.7790531348212377e-10, 4.139938733834401e-270, 0.0, 0.0],
+//            ["O-18", "O-19", "act", "27.1 s", 2.634298973167962e-08, 2.753803230750374e-48, 0.0, 0.0]],
+//        "exposure": 1.0, "fast": 0.0, "Cd": 0.0};
+                        var result;
+                        if (typeof(ldata)!=="string") {
+                            result=ldata.activation;
+                        }
+                        else{
+                            result=$.parseJSON(ldata).activation;
+                        }
+                        result.total.splice(0,0,"total activity","","",""); //for a final column
+                        result.activity.push(result.total);
+                        var data={}
+                        //construct headers
+                        data.headers=["element","daughter","reaction","half life","activity (0 hrs)","activity ( 1hr)", "activity (24 hrs)", "activity (15 days)", result.rest[4]+" (hours)"]
+                        data.rows=[]
+                        for (var i=0; i < result.activity.length; i++){
+                            data.rows.push(result.activity[i]);
+                        }
+
+                        //add headers to table
+                        var row = '<tr class="header">';
+                        for (var i in data.headers) {
+                            row += '<th style=""><a href="#" class="sort"><span>' + data.headers[i] + '</span></a></th>';
+                        }
+                        row += '</tr>'
+                        $(row).appendTo('table[id=results_table]');  //add to the dom
+                        row = '';
+                        for (var i in data.rows) {
+                            row += '<tr id="' + i + '">';
+                            for (var j=0; j <data.rows[i].length; j++){
+                                row += '<td>' + data.rows[i][j] + '</td>';
+                            }
+                            row += '</tr>';
+                        }
+
+
+                        $(row).appendTo('table[id=results_table]'); //add to the dom
+                        //$(row).appendTo('table.data');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--<script type="text/javascript" src="/static/lib/activation.js"></script>-->
+
+
+</head>
+<body>
+<div class="container">
+
+    <hr />
+
+    <!--<div id="tabs"></div>-->
+
+    <div id="activation_form">
+
+
+        <form  id="id-activationForm" class="blueForms" method="post" ><div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='cgmJug2PAM5TlxMPTcM2Q3nFmFR24giG' /> </div><div id="div_id_chemical_formula" class="control-group"><label for="id_chemical_formula" class="control-label requiredField">
+            Chemical Formula<span class="asteriskField">*</span></label><div class="controls"><input id="id_chemical_formula" type="text" class="textinput textInput" name="chemical_formula" maxlength="80" /> </div></div><div id="div_id_mass" class="control-group"><label for="id_mass" class="control-label requiredField">
+            Mass (g)<span class="asteriskField">*</span></label><div class="controls"><input id="id_mass" type="text" class="textinput textInput" name="mass" /> </div></div><div id="div_id_time_on" class="control-group"><label for="id_time_on" class="control-label requiredField">
+            Time on Beam (hours)<span class="asteriskField">*</span></label><div class="controls"><input id="id_time_on" type="text" class="textinput textInput" name="time_on" /> </div></div><div id="div_id_time_off" class="control-group"><label for="id_time_off" class="control-label requiredField">
+            Time off Beam (hours)<span class="asteriskField">*</span></label><div class="controls"><input id="id_time_off" type="text" class="textinput textInput" name="time_off" /> </div></div><div id="div_id_flux" class="control-group"><label for="id_flux" class="control-label requiredField">
+            Instrument Flux (n/cm^2/s)<span class="asteriskField">*</span></label><div class="controls"><input id="id_flux" type="text" class="textinput textInput" name="flux" /> </div></div><div class="form-actions"><input type="submit"
+                                                                                                                                                                                                                                name="submit"
+                                                                                                                                                                                                                                value="Submit"
+
+                                                                                                                                                                                                                                class="btn btn-primary"
+                                                                                                                                                                                                                                id="submit-id-submit"
+
+
+                /> </div></form>
+
+    </div>
+    <div id="results">
+        <table id="results_table" border=1>
+
+        </table>
+
+    </div>
+
+</div>
+</body>
+</html>
