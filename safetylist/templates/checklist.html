@@ -140,32 +140,22 @@ td.top{ border-top-style: solid; border-width:1px; }
 	</tr>
 	
 	<tr>
-		<td class="top" colspan="4" height="60">	
-     <!-- <input type="text" name="name" id="name" class="name"> -->
+		<td class="top" colspan="4" height="100">	
 	  Signature: 
 	  	<div class="sig sigWrapper">
 	    <div class="typed"></div>
 	    <canvas class="pad" width="298" height="60"></canvas>
 	    <input type="hidden" name="output" class="output">
 	  </div>
+	 <script language="javascript"> 
+	 today = new Date(); 
+	 document.write("Date: ",today.getMonth()+1,"/",today.getDate(),"/",today.getYear(),"&nbsp&nbsp&nbsp&nbspTime: ",today.getHours(),":",today.getMinutes());
+	 </script> 
 		</td>
 	</tr>
 </table></center>
 <br>
-
-  <div class="sig sigWrapper">
-    <div class="typed"></div>
-    <canvas class="pad" width="198" height="55"></canvas>
-    <input type="hidden" name="output" class="output">
-  </div>
-	 <button type="submit">Submit</button>
-	<!--<INPUT TYPE="submit" VALUE="Submit">
-&nbsp <INPUT TYPE="reset" VALUE="Reset">
-&nbsp <a href="{% url list %}"><INPUT TYPE="button" VALUE="Completed List"></a> 
-
-
-
-				-->
+<center>	 <button type="submit">Submit</button> </center>
 </form>
 <script>
   $(document).ready(function () {
