@@ -4,13 +4,20 @@ table { border-spacing: 0; border-collapse:collapse; }
 td { vertical-align: middle; white-space:nowrap; }
 td.top{ border-top-style: solid; border-width:1px; }
 </style>
+
+<script src="../build/flashcanvas.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="../build/jquery.signaturepad.min.js"></script>
+<script src="../build/json2.min.js"></script>
+<link rel="stylesheet" href="jquery.signaturepad.css">
+ 
 </head>
 
 <html>
 <body>
 
 	
-<form action="" method='POST'>
+ <form method="post" action="" class="sigPad">
 {%csrf_token %}
 <center><table cellpadding="8" style="border:3px solid black">
 	<tr>
@@ -131,12 +138,40 @@ td.top{ border-top-style: solid; border-width:1px; }
 		<td>Other:</td>
 		<td>{{ form.other }}</td>
 	</tr>
+	
+	<tr>
+		<td class="top" colspan="4" height="60">	
+     <!-- <input type="text" name="name" id="name" class="name"> -->
+	  Signature: 
+	  	<div class="sig sigWrapper">
+	    <div class="typed"></div>
+	    <canvas class="pad" width="298" height="60"></canvas>
+	    <input type="hidden" name="output" class="output">
+	  </div>
+		</td>
+	</tr>
 </table></center>
 <br>
-<center><INPUT TYPE="submit" VALUE="Submit">
+
+  <div class="sig sigWrapper">
+    <div class="typed"></div>
+    <canvas class="pad" width="198" height="55"></canvas>
+    <input type="hidden" name="output" class="output">
+  </div>
+	 <button type="submit">Submit</button>
+	<!--<INPUT TYPE="submit" VALUE="Submit">
 &nbsp <INPUT TYPE="reset" VALUE="Reset">
 &nbsp <a href="{% url list %}"><INPUT TYPE="button" VALUE="Completed List"></a> 
-</form></center>
+
+
+
+				-->
+</form>
+<script>
+  $(document).ready(function () {
+    $('.sigPad').signaturePad({drawOnly:true});
+  });
+</script> 
 <br>
 
 </body>
