@@ -11,7 +11,8 @@ def addcontact(request):
 	if request.method=='POST':
 		form = ChecklistForm(request.POST)
 		if 1:
-			t=render(request,"checklist.html", {"form":form})
+			signature=form.data['output']
+			t=render(request,"checklist.html", {"form":form, "signature":signature})
 			temp_html=t.content
 			myfilebase=hashlib.sha1(temp_html).hexdigest()
 			myfilename_html=os.path.join(r'/tmp',myfilebase+'.html')
@@ -23,13 +24,13 @@ def addcontact(request):
 			#process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
 			print "done"		
 		if form.is_valid():
-			
+			#signature=form.cleaned_data["signature"]
 			#form.save()
 			return HttpResponseRedirect('/list/')
 	else:
 		form= ChecklistForm()
 		if 0:
-			t=render(request,"awlist.html", {"form":form})
+			t=render(request,"awlist.html", {"form":form, "signature":signature})
 			myfile=open(r'/tmp/outfile.html','w')
 			myfile.write(t.content)
 			myfile.close()	
