@@ -21,14 +21,10 @@ urlpatterns = patterns('',
 )
 
 
-urlpatterns += patterns(REPO_ROOT + '.apps.activation_analysis.views',
-                        ('^activation/$', 'activation_view'),
+urlpatterns += patterns(REPO_ROOT + '.safetylist.views',
+                        url('^$', 'addcontact',name='add'),
+                        url('^list','listcontact',name='mylist')
                         #('^$', 'home'),     
                         )
 
-urlpatterns += patterns(REPO_ROOT + '.apps.viewpsd.views',
-                        ('^psd$', 'psd'), 
-                        ('^calculate/$', 'calculate'), 
-                        ('^$', 'home'),                                                      
-                        )
 

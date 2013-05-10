@@ -31,7 +31,7 @@ class Checklist(models.Model):
 		lab_torch 	 = models.CharField (max_length =2, blank=False)
 		spin_coater  = models.CharField (max_length =2, blank=False)
 		furnace 	 = models.CharField (max_length =2, blank=False)
-		lab_press 	 = models.CharField (max_length =2, blank=False)
+		lab_press 	 = models.BooleanField()
 		other 	     = models.CharField (max_length =2, blank=False)
 #		other_text	 = models.CharField (max_length =255, blank=True null=True)
 
