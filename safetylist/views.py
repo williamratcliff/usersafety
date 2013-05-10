@@ -11,7 +11,7 @@ def addcontact(request):
 	if request.method=='POST':
 		form = ChecklistForm(request.POST)
 		if 1:
-			t=render(request,"checklist3.html", {"form":form})
+			t=render(request,"checklist.html", {"form":form})
 			temp_html=t.content
 			myfilebase=hashlib.sha1(temp_html).hexdigest()
 			myfilename_html=os.path.join(r'/tmp',myfilebase+'.html')
@@ -35,7 +35,7 @@ def addcontact(request):
 			myfile.close()	
 			
 			
-	return render(request,"checklist3.html", {"form":form})
+	return render(request,"checklist.html", {"form":form})
 	
 def listcontact(request):
 	contact = Checklist.objects.all()
