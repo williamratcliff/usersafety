@@ -124,10 +124,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'usersafety.urls'
+#ROOT_URLCONF = 'usersafety.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'usersafety.wsgi.application'
+#WSGI_APPLICATION = 'usersafety.wsgi.application'
 
 TEMPLATE_DIRS = (template_dir,
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -150,6 +150,13 @@ INSTALLED_APPS = (
     #'usersafety.apps.viewpsd',
     'safetylist',
 )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'patrick8100@gmail.com'
+EMAIL_HOST_PASSWORD = 'XXXXXX'
+EMAIL_PORT = 587
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
