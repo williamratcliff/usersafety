@@ -7,6 +7,9 @@ import os,sys
 from subprocess import Popen, PIPE
 import hashlib
 from django.core.mail import send_mail, EmailMessage
+import logging
+
+logger=logging.getLogger(__name__)
 
 def addcontact(request):
     if request.method=='POST':
@@ -16,8 +19,10 @@ def addcontact(request):
             signature=form.data['output']
             t=render(request,"checklist.html", {"form":form, "signature":signature})
             temp_html=t.content
+            logger.error("template_html "+temp_html)
 #            myfile=open(r'/tmp/outfile.html','w')
             myfilebase=hashlib.sha1(temp_html).hexdigest()
+            logger.error("myfilebase "+myfilebase)
             myfilename_html=os.path.join(r'/tmp/',myfilebase+'.html')
             myfilename_pdf=os.path.join(r'/tmp/',myfilebase+'.pdf')
             myfilename_pdf=os.path.join(r'/tmp/','abc.pdf')
