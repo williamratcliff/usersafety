@@ -572,7 +572,7 @@ table.MsoTableGrid
   </td>
   <td width=113 style='width:4.0cm;border:none;mso-border-top-alt:solid windowtext .5pt;
   padding:0cm 5.4pt 0cm 5.4pt;height:22.7pt'>
-  <p class=MsoNormal><input id="id_name" type="text" name="name" maxlength="255" /><span
+  <p class=MsoNormal>{{ form.name  }}<span
   style="mso-spacerun:yes">&nbsp;</span><o:p></o:p></p>
   </td>
   <td width=170 style='width:6.0cm;border:none;mso-border-top-alt:solid windowtext .5pt;
@@ -958,8 +958,7 @@ table.MsoTableGrid
   mso-border-right-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
   height:22.7pt'>
   <p class=MsoNormal>    
-  	<input id="id_lab_press" type="radio" name="lab_press" value ="Y"/><label for="id_lab_press">Yes</label>
-    <input id="id_lab_press" type="radio" name="lab_press" value ="NA"/><label for="id_lab_press">N/A</label>
+  	{{ form.lab_press }}
 <o:p></o:p></p>
   </td>
  </tr>
@@ -998,7 +997,7 @@ table.MsoTableGrid
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;font-family:Times'>
-<INPUT TYPE="submit" VALUE="Submit"></form> &nbsp <a href="{% url list %}"><INPUT TYPE="button" VALUE="Completed List"></a>
+<INPUT TYPE="submit" VALUE="Submit"></form> 
 <span style="mso-spacerun:yes">&nbsp;</span><o:p></o:p></span></p>
 
 </div>
