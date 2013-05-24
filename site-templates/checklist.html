@@ -159,7 +159,7 @@ td.top{ border-top-style: solid; border-width:1px; }
   $(document).ready(function () {
     {% if signature %}
     $(document).ready(function () {
-	$('.sigPad').signaturePad({displayOnly:true}).regenerate({{signature}});
+	$('.sigPad').signaturePad({displayOnly:true}).regenerate($parseJSON({{signature}}));
 	});
 	
     {% else %}
