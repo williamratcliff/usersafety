@@ -5,11 +5,11 @@ td { vertical-align: middle; white-space:nowrap; }
 td.top{ border-top-style: solid; border-width:1px; }
 </style>
 
-<script src="/static/build/flashcanvas.js"></script>
+<script src="http://williamratcliff.github.io/signature-pad/assets/flashcanvas.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src="/static/build/jquery.signaturepad.min.js"></script>
-<script src="/static/build/json2.min.js"></script>
-<link rel="stylesheet" href="jquery.signaturepad.css">
+<script src="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.min.js"></script>
+<script src="http://williamratcliff.github.io/signature-pad/assets/json2.min.js"></script>
+<link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
  
 </head>
 <html>
@@ -156,16 +156,18 @@ td.top{ border-top-style: solid; border-width:1px; }
 <center>	 <button type="submit">Submit</button> </center>
 </form>
 <script>
+{% autoescape off%}
   $(document).ready(function () {
     {% if signature %}
     $(document).ready(function () {
-	$('.sigPad').signaturePad({displayOnly:true}).regenerate($parseJSON({{signature}}));
+	$('.sigPad').signaturePad({displayOnly:true}).regenerate({{signature}});
 	});
 	
     {% else %}
 	 $('.sigPad').signaturePad({drawOnly:true});
     {% endif %}
   });
+  {% endautoescape %}
 </script> 
 <br>
 </body>

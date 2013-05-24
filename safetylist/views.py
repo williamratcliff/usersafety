@@ -40,7 +40,7 @@ def addcontact(request):
                 #email.attach_file('outfile.pdf')
                 email.attach_file(myfilename_pdf)
                 email.send()
-            return HttpResponseRedirect('/list/')
+            return HttpResponseRedirect('/thanks/')
     else:
         form= ChecklistForm()
 #		if 0:
@@ -59,6 +59,8 @@ def listcontact(request):
     context ={'contact': contact}
     return render(request, 'checklist2.html', context)
 
+def thanks(request):
+    return render(request,'thanks.html')
 
 def detailcontact(request, pk):
     contact = Checklist.objects.get(pk=pk)
