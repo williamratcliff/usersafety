@@ -45,16 +45,19 @@ def addcontact(request):
 #			t=render(request,"awlist.html", {"form":form, "signature":signature})
 #			myfile=open(r'/tmp/outfile.html','w')
 #			myfile.write(t.content)
-#			myfile.close()				
-    return render(request,"checklist.html", {"form":form})
-	
+#			myfile.close()	
+    try:
+        signature=form.data['output']
+    except:
+        signature=''
+    return render(request,"checklist.html", {"form":form,"signature":signature})
+
 def listcontact(request):
-	contact = Checklist.objects.all()
-	context ={'contact': contact}
-	return render(request, 'checklist2.html', context)
-	
-	
+    contact = Checklist.objects.all()
+    context ={'contact': contact}
+    return render(request, 'checklist2.html', context)
+
+
 def detailcontact(request, pk):
-		contact = Checklist.objects.get(pk=pk)
-		return render(request, 'list2.html', {'user':contact})
-	
+    contact = Checklist.objects.get(pk=pk)
+    return render(request, 'list2.html', {'user':contact})
