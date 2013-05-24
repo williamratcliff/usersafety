@@ -25,7 +25,7 @@ def addcontact(request):
             logger.error("myfilebase "+myfilebase)
             myfilename_html=os.path.join(r'/tmp/',myfilebase+'.html')
             myfilename_pdf=os.path.join(r'/tmp/',myfilebase+'.pdf')
-            myfilename_pdf=os.path.join(r'/tmp/','abc.pdf')
+            #myfilename_pdf=os.path.join(r'/tmp/','abc.pdf')
             myfile=open(myfilename_html,'w')
             myfile.write(temp_html)
             myfile.close()	
@@ -35,9 +35,11 @@ def addcontact(request):
 #            if form.is_valid():
 #            signature=form.cleaned_data["signature"]
             form.save()
-            email = EmailMessage("Safety Check form","Safety Check form is attached","patrick8100@gmail.com",["william.ratcliff@nist.gov"])
-            email.attach_file('outfile.pdf')
-            email.send()
+            if 0:
+                email = EmailMessage("Safety Check form","Safety Check form is attached","patrick8100@gmail.com",["william.ratcliff@nist.gov"])
+                #email.attach_file('outfile.pdf')
+                email.attach_file(myfilename_pdf)
+                email.send()
             return HttpResponseRedirect('/list/')
     else:
         form= ChecklistForm()
