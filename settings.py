@@ -10,6 +10,11 @@ TEMPLATE_DEBUG = True
 import os,sys
 #import ROOT_URL
 
+EMAIL_HOST = os.environ.get("EMAIL_HOST", None)
+EMAIL_USER = os.environ.get("EMAIL_USER", None)
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", None)
+
+
 if sys.platform=='win32':
     HOMEDIR=os.path.dirname(__file__)
     REPO_ROOT = os.path.split(HOMEDIR)[-1] 
@@ -152,9 +157,9 @@ INSTALLED_APPS = (
 )
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'patrick8100@gmail.com'
-EMAIL_HOST_PASSWORD = 'XXXXXX'
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_USER
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
 EMAIL_PORT = 587
 
 
