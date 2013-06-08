@@ -9,13 +9,16 @@ td.top{ border-top-style: solid; border-width:1px; }
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script src="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.min.js"></script>
 <script src="http://williamratcliff.github.io/signature-pad/assets/json2.min.js"></script>
-<<link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
- 
+<link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
+
+<link rel="stylesheet" href="../static/tipTip/tipTip.css" type="text/css">
+<script src="../static/tipTip/jquery.tipTip.minified.js" type="text/javascript"></script>
+
 </head>
 <html>
 <body>
 
- <form method="post" action="" class="sigPad">
+ <form id="safetyForm" method="post" action="" class="sigPad">
 {%csrf_token %}
 <center><table cellpadding="8" style="border:3px solid black">
 	<tr>
@@ -32,28 +35,28 @@ td.top{ border-top-style: solid; border-width:1px; }
 	</tr>
 	
 	<tr>
-		<td>Emergency Contact:<font color="red" size="2"> {{ form.emerg_contact.errors.as_text }}</font></td>
+		<td><span class="someClass" title="Emergency contact person">Emergency Contact:</span><font color="red" size="2"> {{ form.emerg_contact.errors.as_text }}</font></td>
 		<td>{{ form.emerg_contact }}</td>
-		<td>Telephone:<font color="red" size="2"> {{ form.phone.errors.as_text }}</font></td>
+		<td><span class="someClass" title="Emergency contact person telephone">Telephone:</span><font color="red" size="2"> {{ form.phone.errors.as_text }}</font></td>
 		<td>{{ form.phone }}</td>
 	</tr>
 
 	<tr>
-		<td>Relationship:<font color="red" size="2"> {{ form.relationship.errors.as_text }}</font></td>
+		<td><span class="someclass" title="Relationship with Emergency contact person">Relationship:</span><font color="red" size="2"> {{ form.relationship.errors.as_text }}</font></td>
 		<td> {{ form.relationship }}</td>
 		<td></td>
 		<td></td>
 	</tr>
 	
 		<tr>
-		<td class="top">NIST Contact:<font color="red" size="2"> {{ form.nist_contact.errors.as_text }}</font></td>
+		<td class="top"><span class="someClass" title="NIST contact person">NIST Contact:</span><font color="red" size="2"> {{ form.nist_contact.errors.as_text }}</font></td>
 		<td class="top">{{ form.nist_contact }}</td>
-		<td class="top">Division<font color="red" size="2"> {{ form.nist_div.errors.as_text }}</font></td>
+		<td class="top"><span class="someClass" title="NIST contact person division">Division:</span><font color="red" size="2"> {{ form.nist_div.errors.as_text }}</font></td>
 		<td class="top">{{ form.nist_div }}</td>
 	</tr>
 	
 		<tr>
-		<td>Extension:<font color="red" size="2"> {{ form.nist_ext.errors.as_text }}</font></td>
+		<td><span class="someClass" title="NIST contact person 4 digit extension">Extension:</span><font color="red" size="2"> {{ form.nist_ext.errors.as_text }}</font></td>
 		<td>{{ form.nist_ext }}</td>
 		<td></td>
 		<td></td>
@@ -168,6 +171,13 @@ td.top{ border-top-style: solid; border-width:1px; }
     {% endif %}
   });
   {% endautoescape %}
+</script>
+
+
+<script type="text/javascript">
+       $(function(){
+$(".someClass").tipTip({maxWidth: "auto", edgeOffset: 10, defaultPosition: "bottom"});
+});
 </script>
 
  
