@@ -15,6 +15,12 @@ EMAIL_USER = os.environ.get("EMAIL_USER", None)
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD", None)
 
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_USER
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
+EMAIL_PORT = 587
+
 if sys.platform=='win32':
     HOMEDIR=os.path.dirname(__file__)
     REPO_ROOT = os.path.split(HOMEDIR)[-1] 
@@ -23,6 +29,8 @@ else:
     REPO_ROOT = os.path.basename(HOMEDIR)
 
 ROOT_URLCONF = REPO_ROOT + '.urls'
+
+ROOT_URLCONF='urls'
 
 DEBUG = True
 #TEMPLATE_DEBUG = DEBUG
@@ -156,11 +164,7 @@ INSTALLED_APPS = (
     'safetylist',
 )
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = EMAIL_HOST
-EMAIL_HOST_USER = EMAIL_USER
-EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
-EMAIL_PORT = 587
+
 
 
 # A sample logging configuration. The only tangible logging

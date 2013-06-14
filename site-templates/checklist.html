@@ -6,7 +6,7 @@ td.top{ border-top-style: solid; border-width:1px; }
 </style>
 
 <script src="http://williamratcliff.github.io/signature-pad/assets/flashcanvas.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.min.js"></script>
 <script src="http://williamratcliff.github.io/signature-pad/assets/json2.min.js"></script>
 <link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
@@ -14,7 +14,7 @@ td.top{ border-top-style: solid; border-width:1px; }
 <link rel="stylesheet" href="../static/tipTip/tipTip.css" type="text/css">
 <script src="../static/tipTip/jquery.tipTip.minified.js" type="text/javascript"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/additional-methods.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
 
 </head>
 <html>
@@ -160,31 +160,33 @@ td.top{ border-top-style: solid; border-width:1px; }
 <br>
 <center>	 <button type="submit">Submit</button> </center>
 </form>
-<script>
-{% autoescape off%}
+
+<script type="text/javascript">
+{% autoescape off %}
   $(document).ready(function () {
     {% if signature %}
     $(document).ready(function () {
 	$('.sigPad').signaturePad({displayOnly:true}).regenerate({{signature}});
 	});
-	
+
     {% else %}
 	 $('.sigPad').signaturePad({drawOnly:true});
     {% endif %}
-  	
-  {% endautoescape %}
+  });
+{% endautoescape %}
 </script>
 
-<script>
+
+<script type="text/javascript">
 $(document).ready(function(){
 $('form').validate({
 	rules:	{
 		phone: { required: true, phoneUS: true},
 		nist_ext: { required: true, digits: true, minlength: 4, maxlength: 4}
 		},
-	messages: { 
-		phone: { required: "Requied Field", phoneUS: "Please specify a valid phone number"},
-		nist_ext: { required: "Reqied Field", minlength: "Please specify 4 digits Extension", maxlength: "Please specify 4 digits Extension"}
+	messages: {
+		phone: { required: "Required Field", phoneUS: "Please specify a valid phone number"},
+		nist_ext: { required: "Required Field", minlength: "Please specify 4 digits Extension", maxlength: "Please specify 4 digits Extension"}
 		}
 });
 })
