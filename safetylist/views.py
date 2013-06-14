@@ -29,14 +29,14 @@ def addcontact(request):
             myfile=open(myfilename_html,'w')
             myfile.write(temp_html)
             myfile.close()	
-            process=Popen(["/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf", 'file://'+myfilename_html, myfilename_pdf])
+#            process=Popen(["/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf", 'file://'+myfilename_html, myfilename_pdf])
 #            process=Popen(["/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf", "/tmp/outfile.html", "outfile.pdf"])
-#            process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
+            process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
 #            if form.is_valid():
 #            signature=form.cleaned_data["signature"]
             form.save()
             if 0:
-                email = EmailMessage("Safety Check form","Safety Check form is attached","patrick8100@gmail.com",["william.ratcliff@nist.gov"])
+                email = EmailMessage("Safety Check form","Safety Check form is attached","patrick8100@gmail.com",["patrick8100@gmail.com"])
                 #email.attach_file('outfile.pdf')
                 email.attach_file(myfilename_pdf)
                 email.send()
