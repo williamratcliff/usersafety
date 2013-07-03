@@ -1,0 +1,27 @@
+</head>
+<script src="../build/flashcanvas.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script src="../build/jquery.signaturepad.min.js"></script>
+<script src="../build/json2.min.js"></script>
+<link rel="stylesheet" href="jquery.signaturepad.css">
+
+
+
+
+</head>
+<body>
+  <form method="post" action="" class="sigPad">
+ 
+<div class="sig sigWrapper">
+  <div class="typed"></div>
+  <canvas class="pad" width="198" height="55"></canvas>
+  <input type="hidden" name="output" class="output">
+</div>
+  <button type="submit">Submit</button>
+</form>
+<script>
+  $(document).ready(function () {
+    $('.sigPad').signaturePad({drawOnly:true});
+  });
+</script> 
+</body>
