@@ -23,15 +23,21 @@ def addcontact(request):
 #            myfile=open(r'/tmp/outfile.html','w')
             myfilebase=hashlib.sha1(temp_html).hexdigest()
             logger.error("myfilebase "+myfilebase)
-            myfilename_html=os.path.join(r'/tmp/',myfilebase+'.html')
-            myfilename_pdf=os.path.join(r'/tmp/',myfilebase+'.pdf')
+            mydirectory=r'/tmp'
+            if sys.platform=='win32':
+                mydirectory=r'c:\temp'
+            myfilename_html=os.path.join(mydirectory,myfilebase+'.html')
+            myfilename_pdf=os.path.join(mydirectory,myfilebase+'.pdf')
             #myfilename_pdf=os.path.join(r'/tmp/','abc.pdf')
             myfile=open(myfilename_html,'w')
             myfile.write(temp_html)
             myfile.close()	
 #            process=Popen(["/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf", 'file://'+myfilename_html, myfilename_pdf])
 #            process=Popen(["/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf", "/tmp/outfile.html", "outfile.pdf"])
-            process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
+            if sys.platform=='win32':
+                process=Popen(["C:\Program Files (x86)\wkhtmltopdf\wkhtmltopdf", os.path.join(r'file://',myfilename_html), myfilename_pdf])
+            else:
+                process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
 #            if form.is_valid():
 #            signature=form.cleaned_data["signature"]
             form.save()
