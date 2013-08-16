@@ -8,6 +8,7 @@ from subprocess import Popen, PIPE
 import hashlib
 from django.core.mail import send_mail, EmailMessage
 import logging
+import simplejson
 
 logger=logging.getLogger(__name__)
 
@@ -37,10 +38,11 @@ def addcontact(request):
             if sys.platform=='win32':
                 process=Popen(["C:\Program Files (x86)\wkhtmltopdf\wkhtmltopdf", os.path.join(r'file://',myfilename_html), myfilename_pdf])
             else:
-                process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])			
+                #process=Popen(["wkhtmltopdf", "--disable-javascript", 'file://'+myfilename_html, myfilename_pdf])
+                process=Popen(["wkhtmltopdf", 'file://'+myfilename_html, myfilename_pdf])
 #            if form.is_valid():
 #            signature=form.cleaned_data["signature"]
-            form.save()
+            #form.save()
             if 0:
                 email = EmailMessage("Safety Check form","Safety Check form is attached","patrick8100@gmail.com",["patrick8100@gmail.com"])
                 #email.attach_file('outfile.pdf')

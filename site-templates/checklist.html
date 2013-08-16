@@ -1,177 +1,188 @@
-<head>
-<style>
-table { border-spacing: 0; border-collapse:collapse; }	
-td { vertical-align: middle; white-space:nowrap; }
-td.top{ border-top-style: solid; border-width:1px; }
-</style>
+    <html>
+    <head>
+    <style>
+    table { border-spacing: 0; border-collapse:collapse; }	
+    td { vertical-align: middle; white-space:nowrap; }
+    td.top{ border-top-style: solid; border-width:1px; }
+    </style>
+    
+    <script src="http://williamratcliff.github.io/signature-pad/assets/flashcanvas.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.min.js"></script>
+    <script src="http://williamratcliff.github.io/signature-pad/assets/json2.min.js"></script>
+    
+    <link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
+    
+    <!--<link rel="stylesheet" href="../static/build/jquery.signaturepad.css">-->
+    <link rel="stylesheet" href="../static/tipTip/tipTip.css" type="text/css">
+    <script src="../static/tipTip/jquery.tipTip.minified.js" type="text/javascript"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+    
+    
+    <!--<script type="text/javascript">-->
 
-<script src="http://williamratcliff.github.io/signature-pad/assets/flashcanvas.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.min.js"></script>
-<script src="http://williamratcliff.github.io/signature-pad/assets/json2.min.js"></script>
-<!--
-<link rel="stylesheet" href="http://williamratcliff.github.io/signature-pad/assets/jquery.signaturepad.css">
--->
-<link rel="stylesheet" href="../static/build/jquery.signaturepad.css">
-<link rel="stylesheet" href="../static/tipTip/tipTip.css" type="text/css">
-<script src="../static/tipTip/jquery.tipTip.minified.js" type="text/javascript"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+  <!--$(document).ready(function () {-->
+    
+	<!--var sig=[{"lx":86,"ly":26,"mx":86,"my":25},{"lx":94,"ly":25,"mx":86,"my":26},{"lx":123,"ly":22,"mx":94,"my":25},{"lx":138,"ly":20,"mx":123,"my":22},{"lx":155,"ly":18,"mx":138,"my":20},{"lx":178,"ly":16,"mx":155,"my":18},{"lx":199,"ly":13,"mx":178,"my":16},{"lx":218,"ly":13,"mx":199,"my":13},{"lx":237,"ly":13,"mx":218,"my":13},{"lx":247,"ly":13,"mx":237,"my":13},{"lx":243,"ly":19,"mx":247,"my":13},{"lx":236,"ly":22,"mx":243,"my":19},{"lx":226,"ly":27,"mx":236,"my":22},{"lx":215,"ly":32,"mx":226,"my":27},{"lx":206,"ly":33,"mx":215,"my":32},{"lx":199,"ly":37,"mx":206,"my":33},{"lx":193,"ly":37,"mx":199,"my":37},{"lx":192,"ly":37,"mx":193,"my":37},{"lx":189,"ly":37,"mx":192,"my":37},{"lx":186,"ly":37,"mx":189,"my":37},{"lx":183,"ly":37,"mx":186,"my":37},{"lx":179,"ly":37,"mx":183,"my":37}];-->
+	<!--$('.sigPad').signaturePad({displayOnly:true}).regenerate(sig);-->
+    
+  <!--});-->
 
-</head>
-<html>
-<body>
-
- <form method="post" action="" class="sigPad">
-{%csrf_token %}
-<center><table cellpadding="8" style="border:3px solid black">
-	<tr>
-		<th colspan ="4"><center><h1>CENTER FOR NEUTRON RESEARCH</h1></center>
-			<h2>Facility User Safety Awareness Checklist</h2>
-		</th>
-	</tr>
-	
-	<tr>
-		<td class="top">Name:<font color="red" size="2"> {{ form.name.errors.as_text }}</font></td>
-		<td class="top">{{ form.name }}</td> 
-		<td class="top">Home Institution<font color="red" size="2"> {{ form.home_inst.errors.as_text }}</font></td>
-		<td class="top">{{ form.home_inst }}</td>
-	</tr>
-	
-	<tr>
-		<td><span class="someClass" title="Emergency contact person">Emergency Contact:</span><font color="red" size="2"> {{ form.emerg_contact.errors.as_text }}</font></td>
-		<td>{{ form.emerg_contact }}</td>
-		<td><span class="someClass" title="Emergency contact person telephone">Telephone:</span><font color="red" size="2"> {{ form.phone.errors.as_text }}</font></td>
-		<td>{{ form.phone }}</td>
-	</tr>
-
-	<tr>
-		<td><span class="someclass" title="Relationship with Emergency contact person">Relationship:</span><font color="red" size="2"> {{ form.relationship.errors.as_text }}</font></td>
-		<td> {{ form.relationship }}</td>
-		<td></td>
-		<td></td>
-	</tr>
-	
-		<tr>
-		<td class="top"><span class="someClass" title="NIST contact person">NIST Contact:</span><font color="red" size="2"> {{ form.nist_contact.errors.as_text }}</font></td>
-		<td class="top">{{ form.nist_contact }}</td>
-		<td class="top"><span class="someClass" title="NIST contact person division">Division:</span><font color="red" size="2"> {{ form.nist_div.errors.as_text }}</font></td>
-		<td class="top">{{ form.nist_div }}</td>
-	</tr>
-	
-		<tr>
-		<td><span class="someClass" title="NIST contact person 4 digit extension">Extension:</span><font color="red" size="2"> {{ form.nist_ext.errors.as_text }}</font></td>
-		<td>{{ form.nist_ext }}</td>
-		<td></td>
-		<td></td>
-	</tr>
-
-	<tr>
-		<td class="top" colspan="4">Your NIST Contact is required to discuss the following safety information with you before you will be granted
-		<br> unescorted access to the research facilities.This form is to signed and dated by you and your NIST Contact 
-		<br>and returned to the User Office (K07)
-		<br><br><b>Check below box that you have been instructed in the following areas:</b>
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="top">Emergency number (x2222):</td>
-		<td class="top">{{ form.emerg_num }}</td>
-		<td class="top">Liquid Cryogen Handling:</td>
-		<td class="top">{{ form.liq_handle }}</td>
-	</tr>
-	
-	<tr>
-		<td>Emergency Action for Alarms and Fire:</td>
-		<td>{{ form.emerg_action }}</td>
-		<td>General Acid:</td>
-		<td>{{ form.gen_acid }}</td>
-	</tr>
-
-	<tr>
-		<td>Accident Report:</td>
-		<td>{{ form.accid_rep }}</td>
-		<td>Hydrofluoric Acid:</td>
-		<td>{{ form.hyd_acid }}</td>
-	</tr>
-	
-	<tr>
-		<td>General Laboratory Safety:</td>
-		<td>{{ form.gen_lab }}</td>
-		<td>Glove Box:</td>
-		<td>{{ form.glove_box }}</td>
-	</tr>
-		
-	<tr>
-		<td>Source of Safety Information:</td>
-		<td>{{ form.saf_info }}</td>
-		<td>X-ray:</td>
-		<td>{{ form.x_ray }}</td>
-	</tr>
-
-	<tr>
-		<td>Personal Protective Equipment:</td>
-		<td>{{ form.protective }}</td>
-		<td>Laboratory Torch:</td>
-		<td>{{ form.lab_torch }}</td>
-	</tr>
-
-	<tr>
-		<td>Hazard Communication:</td>
-		<td>{{ form.hazacomm }}</td>
-		<td>Spin Coater:</td>
-		<td>{{ form.spin_coater }}</td>
-	</tr>
-
-	<tr>
-		<td>Computer Regulations (NIST Policy):</td>
-		<td>{{ form.comp_reg }}</td>
-		<td>Furnace:</td>
-		<td>{{ form.furnace }}</td>
-	</tr>
-
-	<tr>
-		<td>Instrument Operations:</td>
-		<td>{{ form.inst_op }}</td>
-		<td>Laboratory Press:</td>
-		<td>{{ form.lab_press }}</td>
-	</tr>
-
-	<tr>
-		<td>Crane Safety:</td>
-		<td>{{ form.crane_saf }}</td>
-		<td>Other:</td>
-		<td>{{ form.other }}</td>
-	</tr>
-	
-	<tr>
-		<td class="top" colspan="4" height="100">	
-	  Signature: 
-	  	<div class="sig sigWrapper">
-	    <div class="typed"></div>
-	    <canvas class="pad" width="248" height="55"></canvas>
-	    <input type="hidden" name="output" class="output">
-	  </div>
-	 <script language="javascript"> 
-	 today = new Date(); 
-	 document.write("Date: ",today.getMonth()+1,"/",today.getDate(),"/",today.getYear(),"&nbsp&nbsp&nbsp&nbspTime: ",today.getHours(),":",today.getMinutes());
-	 </script> 
-		</td>
-	</tr>
-</table></center>
-<br>
-<center>	 <button type="submit">Submit</button> </center>
-</form>
-
-<script type="text/javascript">
-{% autoescape off %}
-  $(document).ready(function () {
-    {% if signature %}
-    $(document).ready(function () {
-	$('.sigPad').signaturePad({displayOnly:true}).regenerate({{signature}});
-	});
-
-    {% else %}
+<!--</script>-->
+    
+    </head>
+    
+    <body>
+    
+     <form method="post" action="" class="sigPad">
+    {%csrf_token %}
+    <center><table cellpadding="8" style="border:3px solid black">
+	    <tr>
+		    <th colspan ="4"><center><h1>CENTER FOR NEUTRON RESEARCH</h1></center>
+			    <h2>Facility User Safety Awareness Checklist</h2>
+		    </th>
+	    </tr>
+	    
+	    <tr>
+		    <td class="top">Name:<font color="red" size="2"> {{ form.name.errors.as_text }}</font></td>
+		    <td class="top">{{ form.name }}</td> 
+		    <td class="top">Home Institution<font color="red" size="2"> {{ form.home_inst.errors.as_text }}</font></td>
+		    <td class="top">{{ form.home_inst }}</td>
+	    </tr>
+	    
+	    <tr>
+		    <td><span class="someClass" title="Emergency contact person">Emergency Contact:</span><font color="red" size="2"> {{ form.emerg_contact.errors.as_text }}</font></td>
+		    <td>{{ form.emerg_contact }}</td>
+		    <td><span class="someClass" title="Emergency contact person telephone">Telephone:</span><font color="red" size="2"> {{ form.phone.errors.as_text }}</font></td>
+		    <td>{{ form.phone }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td><span class="someclass" title="Relationship with Emergency contact person">Relationship:</span><font color="red" size="2"> {{ form.relationship.errors.as_text }}</font></td>
+		    <td> {{ form.relationship }}</td>
+		    <td></td>
+		    <td></td>
+	    </tr>
+	    
+		    <tr>
+		    <td class="top"><span class="someClass" title="NIST contact person">NIST Contact:</span><font color="red" size="2"> {{ form.nist_contact.errors.as_text }}</font></td>
+		    <td class="top">{{ form.nist_contact }}</td>
+		    <td class="top"><span class="someClass" title="NIST contact person division">Division:</span><font color="red" size="2"> {{ form.nist_div.errors.as_text }}</font></td>
+		    <td class="top">{{ form.nist_div }}</td>
+	    </tr>
+	    
+		    <tr>
+		    <td><span class="someClass" title="NIST contact person 4 digit extension">Extension:</span><font color="red" size="2"> {{ form.nist_ext.errors.as_text }}</font></td>
+		    <td>{{ form.nist_ext }}</td>
+		    <td></td>
+		    <td></td>
+	    </tr>
+    
+	    <tr>
+		    <td class="top" colspan="4">Your NIST Contact is required to discuss the following safety information with you before you will be granted
+		    <br> unescorted access to the research facilities.This form is to signed and dated by you and your NIST Contact 
+		    <br>and returned to the User Office (K07)
+		    <br><br><b>Check below box that you have been instructed in the following areas:</b>
+		    </td>
+	    </tr>
+	    
+	    <tr>
+		    <td class="top">Emergency number (x2222):</td>
+		    <td class="top">{{ form.emerg_num }}</td>
+		    <td class="top">Liquid Cryogen Handling:</td>
+		    <td class="top">{{ form.liq_handle }}</td>
+	    </tr>
+	    
+	    <tr>
+		    <td>Emergency Action for Alarms and Fire:</td>
+		    <td>{{ form.emerg_action }}</td>
+		    <td>General Acid:</td>
+		    <td>{{ form.gen_acid }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Accident Report:</td>
+		    <td>{{ form.accid_rep }}</td>
+		    <td>Hydrofluoric Acid:</td>
+		    <td>{{ form.hyd_acid }}</td>
+	    </tr>
+	    
+	    <tr>
+		    <td>General Laboratory Safety:</td>
+		    <td>{{ form.gen_lab }}</td>
+		    <td>Glove Box:</td>
+		    <td>{{ form.glove_box }}</td>
+	    </tr>
+		    
+	    <tr>
+		    <td>Source of Safety Information:</td>
+		    <td>{{ form.saf_info }}</td>
+		    <td>X-ray:</td>
+		    <td>{{ form.x_ray }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Personal Protective Equipment:</td>
+		    <td>{{ form.protective }}</td>
+		    <td>Laboratory Torch:</td>
+		    <td>{{ form.lab_torch }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Hazard Communication:</td>
+		    <td>{{ form.hazacomm }}</td>
+		    <td>Spin Coater:</td>
+		    <td>{{ form.spin_coater }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Computer Regulations (NIST Policy):</td>
+		    <td>{{ form.comp_reg }}</td>
+		    <td>Furnace:</td>
+		    <td>{{ form.furnace }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Instrument Operations:</td>
+		    <td>{{ form.inst_op }}</td>
+		    <td>Laboratory Press:</td>
+		    <td>{{ form.lab_press }}</td>
+	    </tr>
+    
+	    <tr>
+		    <td>Crane Safety:</td>
+		    <td>{{ form.crane_saf }}</td>
+		    <td>Other:</td>
+		    <td>{{ form.other }}</td>
+	    </tr>
+	    
+	    <tr>
+		    <td class="top" colspan="4" height="100">	
+	      Signature: 
+		    <div class="sig sigWrapper">
+		<div class="typed"></div>
+		<canvas class="pad" width="248" height="55"></canvas>
+		<input type="hidden" name="output" class="output">
+	      </div>
+	     <script language="javascript"> 
+	     today = new Date(); 
+	     document.write("Date: ",today.getMonth()+1,"/",today.getDate(),"/",today.getYear(),"&nbsp&nbsp&nbsp&nbspTime: ",today.getHours(),":",today.getMinutes());
+	     </script> 
+		    </td>
+	    </tr>
+    </table></center>
+    <br>
+    <center>	 <button type="submit">Submit</button> </center>
+    </form>
+    
+    <script type="text/javascript">
+    {% autoescape off %}
+      $(document).ready(function () {
+	{% if signature %}
+	    var sig={{signature}};
+	    $('.sigPad').signaturePad({displayOnly:true}).regenerate(sig);
+	{% else %}
 	 $('.sigPad').signaturePad({drawOnly:true});
     {% endif %}
   });
